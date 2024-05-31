@@ -1,0 +1,11 @@
+<h2>Mes mots</h2>
+
+<ul *ngFor="let word of words">
+  <li>{{ word }}
+  </li>
+</ul>
+
+<editor apiKey="test"
+        [init]="configuration"
+        (onChange)="onEditorChange($event)"
+        #tinymce></editor>
