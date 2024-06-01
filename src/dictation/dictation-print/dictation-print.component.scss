@@ -1,0 +1,47 @@
+@media print {
+  @page {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  body {
+    padding-top: 72px;
+    padding-bottom: 72px ;
+  }
+  #header {
+    display: none;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+  .after-page-break {
+    margin-top: 3rem;
+  }
+}
+
+.dictation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem 0;
+
+  .word-list span {
+    font-style: italic;
+    font-size: 14pt;
+    font-family: BelleAllure;
+
+    &:not(:last-child) {
+      &:after {
+        font-family: "Comic Sans MS", "Comic Sans", cursive;
+        content: '--';
+        margin:1rem;
+      }
+    }
+  }
+
+  .content {
+    font-size: 13pt;
+    line-height: 2.5;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+  }
+}

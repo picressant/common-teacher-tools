@@ -2,20 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
-import { DictationComponent } from './dictation.component';
+import { DictationCreatorComponent } from './dictation-creator.component';
 
 describe('DictationComponent', () => {
-  let component: DictationComponent;
-  let fixture: ComponentFixture<DictationComponent>;
+  let component: DictationCreatorComponent;
+  let fixture: ComponentFixture<DictationCreatorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DictationComponent],
+      declarations: [DictationCreatorComponent],
       imports: [EditorModule, MatListModule]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(DictationComponent);
+    fixture = TestBed.createComponent(DictationCreatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

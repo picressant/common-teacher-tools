@@ -1,0 +1,29 @@
+<div id="header">
+  <button mat-icon-button (click)="backFromPrint()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
+
+<div class="wrapper" style="width: {{size}}cm">
+  <ng-container *ngFor="let dictationToPrint of dictationsToPrint">
+    <div class="dictation">
+      <div class="word-list">
+        <span *ngFor="let word of dictationToPrint.selectedWords" [innerHTML]="word"></span>
+      </div>
+
+      <div class="content" [innerHTML]="dictationToPrint.levelOneContent">
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="page-break"></div>
+  <div class="after-page-break"></div>
+
+  <ng-container *ngFor="let dictationToPrint of dictationsToPrint">
+    <div class="dictation">
+      <div class="content">
+        <div [innerHTML]="dictationToPrint.levelOneContent"></div>
+      </div>
+    </div>
+  </ng-container>
+</div>

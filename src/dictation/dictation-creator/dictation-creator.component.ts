@@ -1,15 +1,25 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
-import jsPDF from 'jspdf';
+import { Dictation } from '../dictation.model';
 import { SelectedWord } from './dictation.model';
 
 @Component({
-  selector: 'app-dictation',
-  templateUrl: './dictation.component.html',
-  styleUrl: './dictation.component.scss',
+  selector: 'app-dictation-creator',
+  templateUrl: './dictation-creator.component.html',
+  styleUrl: './dictation-creator.component.scss',
 })
-export class DictationComponent implements OnInit {
+export class DictationCreatorComponent implements OnInit {
+
+  // @Input()
+  // dictation: Dictation | undefined;
+
+  @Output()
+  save = new EventEmitter<Dictation>();
+
+  currentDictation: string = '';
+  title: string = '';
 
   configuration: any;
 
@@ -20,13 +30,16 @@ export class DictationComponent implements OnInit {
   preview: ElementRef | undefined;
 
   words: string[] = [];
-  currentDictation: string = '';
+
 
   constructor(
     private cdr: ChangeDetectorRef,
+    public dialogRef: MatDialogRef<DictationCreatorComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Dictation
   ) {
     const that = this;
     this.configuration = {
+      height: '100%',
       plugins: [],
       content_style: 'span.selected-word { background-color: yellow; }',
       style_formats: [
@@ -56,40 +69,12 @@ export class DictationComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.currentDictation = "<p>Dictate your text here</p>";
-    this.words = ["toto"];
-  }
-
-  exportPdf() {
-
-
-    // const specialElementHandlers = {
-    //   '#editor': function (element, renderer) {
-    //     return true;
-    //   }
-    // };
-
-    const pdfTable = this.preview?.nativeElement;
-
-    html2canvas(this.preview?.nativeElement).then(canvas => {
-      //const doc = new jsPDF();
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
-      // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
-      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
-      pdf.save('Filename.pdf');
-      // doc.html(pdfTable.innerHTML, {
-      //   callback(rst) {
-      //     rst.save('dictation.pdf');
-      //   },
-      //   x: 10,
-      //   y: 10
-      // });
-    });
-
-
-
-    //doc.save('dictation.pdf');
+    if (this.data) {
+      this.currentDictation = this.data.content;
+      this.title = this.data.title;
+      this.words = this.extractCurrentSelectedWords(this.currentDictation);
+      console.log(this.data);
+    }
   }
 
   onEditorChange($event: any) {
@@ -132,5 +117,14 @@ export class DictationComponent implements OnInit {
     } else {
       this.tinymce.editor.setContent(content.replaceAll(rebuiltWord, selectedWord));
     }
+  }
+
+  export() {
+    const dictation: Dictation = {
+      title: this.title,
+      content: this.currentDictation,
+    };
+
+    this.dialogRef.close({event: 'close', data: dictation});
   }
 }

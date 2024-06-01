@@ -1,5 +1,4 @@
-export interface SelectedWord {
-  prefix: string,
-  suffix: string,
-  word: string
+export interface Dictation {
+  title: string;
+  content: string;
 }
