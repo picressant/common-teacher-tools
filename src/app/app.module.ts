@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { DictationModule } from '../dictation/dictation.module';
 import { AppComponent } from './app.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,9 @@ import { AppComponent } from './app.component';
   ],
   bootstrap: [
     AppComponent,
+  ],
+  providers: [
+    provideAnimationsAsync()
   ],
 })
 export class AppModule {
