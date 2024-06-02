@@ -19,7 +19,6 @@ jobs:
         with:
           find: "{{ TINY_API_KEY }}"
           replace: ${{ secrets.TINY_API_KEY }}
-          include: "environment.prod.ts"
 
       - name: Set up Node Build front with node
         uses: actions/setup-node@v1
