@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  tinyApiKey: 'p'
+  tinyApiKey: '{{ TINY_API_KEY }}'
 };
