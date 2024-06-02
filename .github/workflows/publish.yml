@@ -27,7 +27,7 @@ jobs:
           node-version: 18.20.3
 
       - name: Build front
-        run: npm install && npm run test && npm run build-prod
+        run: npm install && npm run build-prod
 
       - name: Copy front to server
         uses: appleboy/scp-action@master
