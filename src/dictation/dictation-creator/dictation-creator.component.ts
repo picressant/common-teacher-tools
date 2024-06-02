@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import html2canvas from 'html2canvas';
-import jspdf from 'jspdf';
 import { environment } from '../../environment/environment';
 import { Dictation } from '../dictation.model';
 import { SelectedWord } from './dictation.model';
