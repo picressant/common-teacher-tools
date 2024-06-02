@@ -3,6 +3,9 @@
     <input matInput [(ngModel)]="title" placeholder="Titre de la dictée">
   </mat-form-field>
 </div>
+<div>
+  {{ apiKey }}
+</div>
 
 <div class="wrapper">
   <editor [apiKey]="apiKey"
