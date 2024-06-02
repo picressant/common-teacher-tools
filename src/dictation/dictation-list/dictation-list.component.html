@@ -1,0 +1,30 @@
+<ng-container *ngIf="mode === 'edit'">
+
+  <h1>Gestionnaire de dictées à trous</h1>
+
+  <div class="dictation-list">
+    <mat-card class="Dictation" *ngFor="let d of dictations">
+      <mat-card-header>
+        <mat-card-title>{{ d.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content [innerHTML]="d.content">
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="edit(d)">Editer</button>
+        <button mat-button color="warn" (click)="delete(d)">Supprimer</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <button mat-fab color="primary" id="fab-create" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button mat-fab color="primary" id="fab-print" (click)="print()">
+    <mat-icon>print</mat-icon>
+  </button>
+</ng-container>
+
+<app-dictation-print *ngIf="mode === 'print'"
+                     [dictations]="dictations"
+                     (close)="backFromPrint()"></app-dictation-print>

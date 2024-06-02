@@ -1,0 +1,25 @@
+<div class="header">
+  <mat-form-field class="example-form-field">
+    <input matInput [(ngModel)]="title" placeholder="Titre de la dictée">
+  </mat-form-field>
+</div>
+
+<div class="wrapper">
+  <editor [apiKey]="apiKey"
+          [initialValue]="currentDictation"
+          [init]="configuration"
+          (onChange)="onEditorChange($event)"
+          #tinymce></editor>
+
+  <div class="selected-words">
+    <h3>Mots sélectionnés</h3>
+    <mat-chip-set>
+      <mat-chip *ngFor="let word of words">
+        <span [innerHTML]="word"></span>
+      </mat-chip>
+    </mat-chip-set>
+  </div>
+</div>
+<div class="footer">
+  <button mat-flat-button color="primary" (click)="export()">Sauvegarder la dictée</button>
+</div>
