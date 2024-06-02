@@ -39,9 +39,27 @@ export class DictationPrintComponent implements OnInit {
     const selectedWords = content.match(/<span class="selected-word">(.+?)<\/span>/g);
     if (selectedWords) {
       const words = selectedWords.map(word => word.replace(/<span class="selected-word">(.+?)<\/span>/, '$1'));
-      return [...new Set(words)];
+      const array = [...new Set(words)];
+      this.shuffle(array);
+      return array;
     }
     return [];
+  }
+
+  shuffle(array: any[]) {
+    let currentIndex = array.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
   }
 
   backFromPrint() {

@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
+import { environment } from '../../environment/environment';
 import { Dictation } from '../dictation.model';
 import { SelectedWord } from './dictation.model';
 
@@ -20,6 +21,7 @@ export class DictationCreatorComponent implements OnInit {
 
   currentDictation: string = '';
   title: string = '';
+  apiKey = environment.tinyApiKey;
 
   configuration: any;
 

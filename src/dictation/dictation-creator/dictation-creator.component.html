@@ -5,7 +5,7 @@
 </div>
 
 <div class="wrapper">
-  <editor apiKey="test"
+  <editor [apiKey]="apiKey"
           [initialValue]="currentDictation"
           [init]="configuration"
           (onChange)="onEditorChange($event)"
