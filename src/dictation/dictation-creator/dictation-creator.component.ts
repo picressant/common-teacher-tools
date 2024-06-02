@@ -73,7 +73,6 @@ export class DictationCreatorComponent implements OnInit {
       this.currentDictation = this.data.content;
       this.title = this.data.title;
       this.words = this.extractCurrentSelectedWords(this.currentDictation);
-      console.log(this.data);
     }
   }
 
@@ -84,10 +83,12 @@ export class DictationCreatorComponent implements OnInit {
   }
 
   extractCurrentSelectedWords(content: string) {
-    const selectedWords = content.match(/<span class="selected-word">(.+?)<\/span>/g);
-    if (selectedWords) {
-      const words = selectedWords.map(word => word.replace(/<span class="selected-word">(.+?)<\/span>/, '$1'));
-      return [...new Set(words)];
+    if (content && content !== '') {
+      const selectedWords = content.match(/<span class="selected-word">(.+?)<\/span>/g);
+      if (selectedWords) {
+        const words = selectedWords.map(word => word.replace(/<span class="selected-word">(.+?)<\/span>/, '$1'));
+        return [...new Set(words)];
+      }
     }
     return [];
   }

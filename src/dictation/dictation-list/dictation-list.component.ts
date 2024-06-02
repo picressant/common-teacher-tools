@@ -16,23 +16,24 @@ export class DictationListComponent {
   mode: Mode = 'edit';
 
   public constructor(public dialog: MatDialog) {
-    this.dictations.push({
-      title: 'Test',
-      content: '<p>Je suis une super <span class="selected-word">maitresse</span> et j\'ai un <span class="selected-word">b&eacute;b&eacute;</span> orgre dans le ventre. Il aime manger des nouilles et il me fait pleurer devant la télé. Dure dure la vie de Maman</p>',
-    });
-
-    this.dictations.push({
-      title: 'Test 2',
-      content: '<p>Je suis une super <span class="selected-word">maman</span> et j\'aime le <span class="selected-word">piment</span> d\'Espelette.</p>',
-    });
+    localStorage.getItem('dictations') ? this.dictations = JSON.parse(localStorage.getItem('dictations') || '[]') : [];
   }
 
   edit(d: Dictation) {
-    this.dialog.open(DictationCreatorComponent, {
+    const ref = this.dialog.open(DictationCreatorComponent, {
       width: '90vw', // Set width to 60% of the viewport width
       maxWidth: '100vw',
       height: '90vh', // Set height to 55% of the viewport height
       data: d,
+    });
+
+    ref.afterClosed().subscribe(result => {
+      if (result.data) {
+        d.title = result.data.title;
+        d.content = result.data.content;
+      }
+
+      this.saveToLocalStorage();
     });
   }
 
@@ -48,11 +49,14 @@ export class DictationListComponent {
       if (result.data) {
         this.dictations.push(result.data);
       }
+
+      this.saveToLocalStorage();
     });
   }
 
   delete(d: Dictation) {
     this.dictations = [...this.dictations.filter(dictation => dictation !== d)];
+    this.saveToLocalStorage()
   }
 
   print() {
@@ -61,5 +65,9 @@ export class DictationListComponent {
 
   backFromPrint() {
     this.mode = 'edit';
+  }
+
+  private saveToLocalStorage() {
+    localStorage.setItem('dictations', JSON.stringify(this.dictations));
   }
 }
