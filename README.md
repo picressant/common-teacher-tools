@@ -1,5 +1,17 @@
 # CommonTeacherTools
 
+![Workflow](https://github.com/picressant/common-teacher-tools/actions/workflows/publish.yml/badge.svg)
+
+Repository of tools to help my beloved wife generate files related to her teaching work.
+
+Contains:
+  * Generator of dictation
+
+
+Deploying to https://teacher.pierre-cressant.dev
+
+## Tech info
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
 
 ## Development server
